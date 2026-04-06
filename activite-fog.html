@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déploiement FOG – QASSAB Faraj</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-circle">FQ</div>
+      <div class="name">Faraj</div>
+      <div class="title">BTS SIO SISR</div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="index.html"><span class="nav-icon">🏠</span> Accueil</a></li>
+        <li><a href="parcours.html"><span class="nav-icon">🎓</span> Parcours</a></li>
+        <li><a href="entreprise.html"><span class="nav-icon">🏢</span> Entreprise</a></li>
+        <li><a href="activites.html" class="active"><span class="nav-icon">📂</span> Activités</a></li>
+        <li><a href="veille-technologique.html"><span class="nav-icon">🔍</span> Veille Technologique</a></li>
+        <li><a href="annexe.html"><span class="nav-icon">📎</span> Annexe</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">© 2025 QASSAB Faraj</div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <h1>🖥️ Déploiement d'images système via FOG & Borne de consultation</h1>
+      <p>Catégorie : Déploiement &amp; Maintenance</p>
+    </div>
+
+    <div class="page-body">
+
+      <a href="activites.html" class="detail-back">← Retour aux activités</a>
+
+      <!-- Résumé -->
+      <div class="card" style="margin-bottom:2rem;display:flex;gap:2rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Technologies</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span class="badge badge-primary">FOG</span>
+            <span class="badge badge-primary">PXE</span>
+            <span class="badge badge-primary">Windows</span>
+            <span class="badge badge-primary">Linux</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Périmètre</p>
+          <p style="font-size:0.88rem;margin:0;">Salles informatiques + Borne de consultation interactive</p>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Lieu</p>
+          <p style="font-size:0.88rem;margin:0;">SMIR – IUT de Bourg-en-Bresse</p>
+        </div>
+      </div>
+
+      <!-- Contexte -->
+      <div class="detail-section">
+        <h3>📋 Contexte</h3>
+        <div class="card">
+          <p>
+            L'IUT de Bourg-en-Bresse dispose de plus de 20 salles informatiques avec des postes qu'il faut
+            régulièrement réinitialiser ou mettre à jour (en fin d'année, lors du renouvellement de matériel
+            ou après un incident). Le déploiement manuel étant trop long, le service SMIR utilise
+            <strong>FOG Project</strong>, un serveur de clonage réseau open-source basé sur PXE.
+          </p>
+          <p style="margin-bottom:0;">
+            Une mission complémentaire a consisté à créer une <strong>maquette de borne de consultation interactive</strong>
+            déployée via FOG, destinée à l'accueil de l'établissement.
+          </p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="detail-section">
+        <h3>⚙️ Actions réalisées</h3>
+        <div class="card">
+          <div style="margin-bottom:1.25rem;">
+            <p style="font-weight:600;color:var(--primary);font-size:0.9rem;margin-bottom:0.5rem;">🖥️ Déploiement FOG classique</p>
+            <ul class="info-list">
+              <li><span class="bullet"></span>Administration du serveur FOG (gestion des groupes, hôtes, images)</li>
+              <li><span class="bullet"></span>Capture d'images système masterisées depuis les postes de référence</li>
+              <li><span class="bullet"></span>Déploiement sur les machines des salles informatiques via PXE</li>
+              <li><span class="bullet"></span>Gestion des tâches planifiées de déploiement nocturne</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-weight:600;color:var(--primary);font-size:0.9rem;margin-bottom:0.5rem;">🖥️ Maquette borne de consultation</p>
+            <ul class="info-list">
+              <li><span class="bullet"></span>Conception de l'image système dédiée borne (Linux kiosque)</li>
+              <li><span class="bullet"></span>Développement de l'interface utilisateur tactile</li>
+              <li><span class="bullet"></span>Intégration des fonctionnalités de consultation (plan du campus, infos pratiques)</li>
+              <li><span class="bullet"></span>Tests utilisateurs et ajustements ergonomiques</li>
+              <li><span class="bullet"></span>Déploiement de l'image via FOG sur le matériel dédié</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      <div class="detail-section">
+        <h3>✅ Résultats obtenus</h3>
+        <div class="card">
+          <ul class="info-list">
+            <li><span class="bullet"></span>Déploiement d'une salle entière (30 postes) en moins d'une heure</li>
+            <li><span class="bullet"></span>Standardisation des environnements entre toutes les salles</li>
+            <li><span class="bullet"></span>Borne de consultation fonctionnelle et déployable à l'identique</li>
+            <li><span class="bullet"></span>Procédure documentée pour les futurs déploiements</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Compétences -->
+      <div class="detail-section">
+        <h3>🎓 Compétences BTS SIO mobilisées</h3>
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <span class="badge badge-highlight">B3 – Faire évoluer l'infrastructure</span>
+            <span class="badge badge-primary">Administration système</span>
+            <span class="badge badge-primary">Clonage réseau</span>
+            <span class="badge badge-primary">PXE / Boot réseau</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

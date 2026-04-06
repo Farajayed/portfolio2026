@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Script d'inventaire – QASSAB Faraj</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-circle">FQ</div>
+      <div class="name">Faraj</div>
+      <div class="title">BTS SIO SISR</div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="index.html"><span class="nav-icon">🏠</span> Accueil</a></li>
+        <li><a href="parcours.html"><span class="nav-icon">🎓</span> Parcours</a></li>
+        <li><a href="entreprise.html"><span class="nav-icon">🏢</span> Entreprise</a></li>
+        <li><a href="activites.html" class="active"><span class="nav-icon">📂</span> Activités</a></li>
+        <li><a href="veille-technologique.html"><span class="nav-icon">🔍</span> Veille Technologique</a></li>
+        <li><a href="annexe.html"><span class="nav-icon">📎</span> Annexe</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">© 2025 QASSAB Faraj</div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <h1>📋 Script d'inventaire automatique PowerShell</h1>
+      <p>Catégorie : Automatisation &amp; Scripts</p>
+    </div>
+
+    <div class="page-body">
+
+      <a href="activites.html" class="detail-back">← Retour aux activités</a>
+
+      <!-- Résumé -->
+      <div class="card" style="margin-bottom:2rem;display:flex;gap:2rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Technologies</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span class="badge badge-primary">PowerShell</span>
+            <span class="badge badge-primary">GLPI</span>
+            <span class="badge badge-primary">WMI</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Résultat clé</p>
+          <p style="font-size:0.95rem;font-weight:700;color:var(--highlight);margin:0;">10h/semaine économisées</p>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <p style="font-size:0.75rem;font-weight:600;color:var(--text-light);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.3rem;">Périmètre</p>
+          <p style="font-size:0.88rem;margin:0;">550 postes – 3 sites IUT</p>
+        </div>
+      </div>
+
+      <!-- Contexte -->
+      <div class="detail-section">
+        <h3>📋 Contexte</h3>
+        <div class="card">
+          <p>
+            La mise à jour de l'inventaire du parc informatique dans <strong>GLPI</strong> était effectuée
+            manuellement par les techniciens, poste par poste. Cette tâche chronophage (environ 10 heures
+            par semaine) mobilisait des ressources qui auraient pu être allouées au support utilisateur.
+          </p>
+          <p style="margin-bottom:0;">
+            L'objectif était de développer un script PowerShell capable de collecter automatiquement
+            les informations matérielles et logicielles de tous les postes du réseau, puis de les
+            exporter vers GLPI sans intervention manuelle.
+          </p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="detail-section">
+        <h3>⚙️ Développement du script</h3>
+        <div class="card">
+          <ul class="info-list">
+            <li><span class="bullet"></span><strong>Analyse des besoins</strong> – Identification des données à collecter (modèle, RAM, disque, OS, logiciels installés, utilisateur connecté)</li>
+            <li><span class="bullet"></span><strong>Requêtes WMI/CIM</strong> – Utilisation des classes Win32 pour interroger les machines à distance</li>
+            <li><span class="bullet"></span><strong>Parcours du réseau</strong> – Script itérant sur la liste des hôtes actifs du domaine</li>
+            <li><span class="bullet"></span><strong>Export GLPI</strong> – Formatage des données et mise à jour via l'API GLPI ou import CSV</li>
+            <li><span class="bullet"></span><strong>Gestion des erreurs</strong> – Logs des machines injoignables ou en erreur</li>
+            <li><span class="bullet"></span><strong>Planification</strong> – Tâche planifiée Windows pour exécution automatique hebdomadaire</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Extrait code -->
+      <div class="detail-section">
+        <h3>💻 Extrait illustratif du script</h3>
+        <div class="card" style="background:#1e1e2e;color:#cdd6f4;border:none;">
+          <pre style="font-size:0.78rem;line-height:1.6;overflow-x:auto;font-family:'Courier New',monospace;margin:0;"><span style="color:#cba6f7;"># Collecte des informations matérielles via WMI</span>
+<span style="color:#89b4fa;">$computers</span> = <span style="color:#a6e3a1;">Get-ADComputer</span> -Filter * | Select -ExpandProperty Name
+
+<span style="color:#89dceb;">foreach</span> (<span style="color:#89b4fa;">$computer</span> in <span style="color:#89b4fa;">$computers</span>) {
+    <span style="color:#89dceb;">if</span> (<span style="color:#a6e3a1;">Test-Connection</span> <span style="color:#89b4fa;">$computer</span> -Count 1 -Quiet) {
+        <span style="color:#89b4fa;">$sys</span>   = <span style="color:#a6e3a1;">Get-CimInstance</span> -ComputerName <span style="color:#89b4fa;">$computer</span> Win32_ComputerSystem
+        <span style="color:#89b4fa;">$os</span>    = <span style="color:#a6e3a1;">Get-CimInstance</span> -ComputerName <span style="color:#89b4fa;">$computer</span> Win32_OperatingSystem
+        <span style="color:#89b4fa;">$disk</span>  = <span style="color:#a6e3a1;">Get-CimInstance</span> -ComputerName <span style="color:#89b4fa;">$computer</span> Win32_LogicalDisk -Filter "DeviceID='C:'"
+
+        <span style="color:#cba6f7;"># Export vers CSV pour import GLPI</span>
+        [<span style="color:#f38ba8;">PSCustomObject</span>]@{
+            Nom     = <span style="color:#89b4fa;">$computer</span>
+            RAM_Go  = [<span style="color:#f38ba8;">math</span>]::Round(<span style="color:#89b4fa;">$sys</span>.TotalPhysicalMemory / 1GB, 1)
+            OS      = <span style="color:#89b4fa;">$os</span>.Caption
+            Disque  = [<span style="color:#f38ba8;">math</span>]::Round(<span style="color:#89b4fa;">$disk</span>.Size / 1GB)
+        }
+    }
+} | <span style="color:#a6e3a1;">Export-Csv</span> "inventaire.csv" -NoTypeInformation -Encoding UTF8</pre>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      <div class="detail-section">
+        <h3>✅ Résultats obtenus</h3>
+        <div class="grid-2" style="margin-bottom:1rem;">
+          <div class="stat-box"><div class="number">10h</div><div class="label">économisées / semaine</div></div>
+          <div class="stat-box"><div class="number">100%</div><div class="label">de postes couverts</div></div>
+        </div>
+        <div class="card">
+          <ul class="info-list">
+            <li><span class="bullet"></span>Inventaire GLPI toujours à jour sans intervention manuelle</li>
+            <li><span class="bullet"></span>Détection rapide des postes avec configuration obsolète</li>
+            <li><span class="bullet"></span>Fiabilité améliorée des données d'inventaire</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Compétences -->
+      <div class="detail-section">
+        <h3>🎓 Compétences BTS SIO mobilisées</h3>
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <span class="badge badge-highlight">B2 – Répondre aux incidents</span>
+            <span class="badge badge-highlight">B3 – Faire évoluer l'infrastructure</span>
+            <span class="badge badge-primary">Scripting PowerShell</span>
+            <span class="badge badge-primary">Administration AD</span>
+            <span class="badge badge-primary">GLPI</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
